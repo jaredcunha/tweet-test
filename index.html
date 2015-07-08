@@ -17,17 +17,21 @@
 
 			var $discount = getQueryVariable("discount");
 			var $percent = getQueryVariable("percent");
-			var $merchant = getQueryVariable("merchant");
+			var $merchant = decodeURIComponent(getQueryVariable("merchant"));
 
 			$('.discount').text($discount);
 			$('.percent').text($percent);
 			$('.merchant').text($merchant);
 
-			var $tweetText = "I%20saved%20%24"+$discount+"%20with%20a%20"+$percent+"%25%20discount%20at%20"+$merchant;
+			//var decodedUrl = decodeURIComponent($merchant);
+			var decodedUri = decodeURIComponent(getQueryVariable("merchant"));
+			
 
-			//alert($tweetText);
+			var $tweetText = "I saved $"+$discount+" with a "+$percent+"% discount at "+$merchant;
+			var $encodedTweetText = encodeURIComponent($tweetText);
 
-			$("#clicker").attr("href", "https://twitter.com/intent/tweet?text="+$tweetText);
+
+			$("#clicker").attr("href", "https://twitter.com/intent/tweet?text="+$encodedTweetText);
 		});
 
 		window.twttr = window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
