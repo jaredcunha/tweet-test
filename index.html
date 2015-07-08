@@ -28,15 +28,29 @@
 			//alert($tweetText);
 
 			$("#clicker").attr("href", "https://twitter.com/intent/tweet?text="+$tweetText);
+		});
 
-			
+		window.twttr = window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+
+		window.twttr.ready(function (twttr) {
+		    // undefined :(
+		   twttr.events.bind(
+			  'tweet',
+			  function (event) {
+			    $("#pagetitle").text("you win");
+			  }
+			);
 		});
 
 		</script>
 	</head>
 	<body>
+		<h1 id="pagetitle">tweet your savings and wind a prize.</h1>
 		<p class="tweet">I saved $<span class="discount"></span> with a <span class="percent"></span>% discount <span class="merchant"></span></p>
 
-		<a id="clicker" href="https://twitter.com/intent/tweet">tweet</a>
+		<a id="clicker" href="https://twitter.com/intent/tweet" ><span>tweet</span></a>
+
+		
+		<div id="first-tweet"></div>
 	</body>
 </html>
